@@ -1,13 +1,12 @@
-import { Container, Text } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import Navbar from './sections/Navbar';
+import Hero from './sections/Hero';
 
 const App = () => {
   return (
-    <Container maxW={'7xl'}>
+    <Container as="main" maxW={'7xl'}>
       <Navbar />
-      <Text fontSize="2xl" color="white" textDecor={'underline'}>
-        Hello, Three.js!
-      </Text>
+      <Hero />
     </Container>
   );
 };

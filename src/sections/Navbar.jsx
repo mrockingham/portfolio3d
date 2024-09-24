@@ -25,20 +25,20 @@ const Navbar = () => {
         <Flex
           direction={{ base: 'column', md: 'row' }}
           justifyContent={'space-between'}
-          w={'full'}
+          w={{ base: 'full', md: 'auto' }}
         >
-          {navLinks.map(({ id, name, href }, index) => (
+          {navLinks.map(({ name, href }) => (
             <ListItem
-              color={'whiteAlpha.400'}
-              fontFamily={'bold'}
-              _hover={{ color: 'white', bg: 'whiteAlpha.100' }}
-              mr={{ base: 0, md: 4 }}
-              key={id}
-              // pb={{ base: index === navLinks.length - 1 ? 0 : 4, md: 0 }}
-              p={{ base: '4, 4, 4, 0', md: 0 }}
-              w={{ base: 'full', md: 'auto' }}
+              key={name}
+              mr={{ base: 0, md: 5 }}
+              mb={{ base: 5, md: 0 }}
             >
-              <Link onClick={() => {}} href={href}>
+              <Link
+                color={'whiteAlpha.400'}
+                _hover={{ color: 'white' }}
+                onClick={() => {}}
+                href={href}
+              >
                 {name}
               </Link>
             </ListItem>
