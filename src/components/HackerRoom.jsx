@@ -7,13 +7,27 @@ Source: https://sketchfab.com/3d-models/low-poly-computer-desk-c67f61fa444044bcb
 Title: Low Poly Computer Desk
 */
 
-import React, { useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useTexture } from '@react-three/drei';
 
 const HackerRoom = props => {
   const { nodes, materials } = useGLTF('/models/low-poly-computer-desk.glb');
+  const monitorTexture = useTexture('/textures/desk/monitor.png');
+  const screenTexture = useTexture('/textures/desk/screen.png');
+
+  console.log(materials);
   return (
     <group {...props} dispose={null}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube029_Material_0.geometry}
+        material={materials.Material}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={100}
+      >
+        {/* <meshMatcapMaterial map={monitorTexture} /> */}
+      </mesh>
+
       <mesh
         castShadow
         receiveShadow

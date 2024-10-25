@@ -1,13 +1,21 @@
-import React from 'react';
+/* eslint-disable react/no-unknown-property */
+
 import { Box, Text } from '@chakra-ui/react';
 import { Canvas } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
 import HackerRoom from '../components/HackerRoom';
-import { useGLTF } from '@react-three/drei';
+
 import { Suspense } from 'react';
 import CanvasLoader from '../components/CanvasLoader';
 import { useControls } from 'leva';
+// import { isSmall, isMobile, isTablet } from '../utils/mediaquries';
+import { useMediaQuery } from 'react-responsive';
+import Cube from '../components/Cube';
+import Target from '../components/Target';
+import ReactLogo from '../components/ReactLogo';
+import Rings from '../components/rings';
 const Hero = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const x = useControls('HackerRoom', {
     positionX: {
       value: 2.5,
@@ -45,12 +53,13 @@ const Hero = () => {
       max: 10,
     },
   });
+
   return (
     <Box
       as="section"
       minH="100vh"
       border="2px"
-      borderColor="blue.500"
+      borderColor="transparent"
       w="full"
       flexDir={'column'}
       pos={'relative'}
@@ -84,13 +93,21 @@ const Hero = () => {
             <PerspectiveCamera makeDefault position={[0, 0, 30]} />
             <HackerRoom
               //   scale={0.5}
-              scale={[x.scale, x.scale, x.scale]}
+              scale={isMobile ? 0.7 : 1.2}
               //   position={[0, 0, 0]}
-              //   rotation={[0, -Math.PI / 2, 0]}
-              position={[x.positionX, x.positionY, x.positionZ]}
-              rotation={[x.rotationX, x.rotationY, x.rotationZ]}
+              rotation={[0, -Math.PI / 2, -0.4]}
+              position={isMobile ? [0.3, 1, 1.9] : [0.7, -3.3, 1.9]}
+              // rotation={[0, -1.6, -0.4]}
             />
+            <group>
+              <Target position={[-10.7, 1.6, 1.9]} />
+              <ReactLogo position={[7.7, 7.6, 1.9]} />
+              <Cube position={[4.7, -6.6, 10.9]} />
+              <Rings position={[-20.7, 18.6, 1.9]} />
+            </group>
             <ambientLight intensity={5} />
+
+            <directionalLight position={[10, 10, 10]} />
           </Suspense>
         </Canvas>
       </Box>
